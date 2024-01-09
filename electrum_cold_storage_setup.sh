@@ -31,6 +31,8 @@ sudo apt -y install \
 	jq \
 	python3-pyqt5 libsecp256k1-0 python3-cryptography python3-setuptools python3-pip
 
+sudo bash -c "echo none > /sys/class/leds/led0/trigger"
+
 echo "\n"
 echo "============================="
 echo "Download and install Electrum"
