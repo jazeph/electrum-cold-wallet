@@ -31,8 +31,6 @@ sudo apt -y install \
 	jq \
 	python3-pyqt5 libsecp256k1-0 python3-cryptography python3-setuptools python3-pip
 
-sudo bash -c "echo none > /sys/class/leds/led0/trigger"
-
 echo "\n"
 echo "============================="
 echo "Download and install Electrum"
@@ -49,6 +47,8 @@ python3 -m pip install --user Electrum-$ELECTRUM_VERSION.tar.gz
 
 sudo bash -c "echo \"alias electrum=/home/pi/.local/bin/electrum\" > /etc/rc.local"
 sudo bash -c "echo \"electrum daemon -d\" >> /etc/rc.local"
+
+sudo bash -c "echo none > /sys/class/leds/led0/trigger"
 
 alias electrum=/home/pi/.local/bin/electrum
 
