@@ -9,12 +9,14 @@ rm -rf /home/pi/.electrum/
 
 if (whiptail --title "Electrum wallet" --yesno "Do you already have an Electrum wallet?" 8 78); then
         SEED=$(whiptail --title "Electrum seed" --inputbox "Enter your Electrum seed" 20 78 3>&1 1>&2 2>&3)
-	echo "Restoring Electrum wallet... $SEED"
+	echo "Restoring Electrum wallet..."
 	electrum --offline restore --password "$PASSWORD" "$SEED" | whiptail --title "Setting up Electrum" --gauge "Restoring wallet..." 20 40 $PROGRESS
+	echo return=$?
 	SEED=""
 else
 	echo "Creating Electrum wallet..."
         electrum --offline create --password "$PASSWORD" | whiptail --title "Setting up Electrum" --gauge "Creating wallet..." 20 40 $PROGRESS
+	echo return=$?
 fi
 
 PROGRESS=20
