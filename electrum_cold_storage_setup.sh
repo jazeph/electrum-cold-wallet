@@ -53,17 +53,12 @@ sudo bash -c "echo none > /sys/class/leds/led0/trigger"
 alias electrum=/home/pi/.local/bin/electrum
 
 # generate Electrum password based on device serial number and inserted USB stick UUID
-SERIAL_NUMBER="$(sudo cat -v /sys/firmware/devicetree/base/serial-number)"
-USB_UUID="$(sudo blkid -sUUID $USB_PARTITION | cut -d '"' -f 2)"
-PASSWORD=$(echo "$SERIAL_NUMBER $USB_UUID" | base64)
+PASSWORD=$(./generate_password.sh)
 
 
-
-echo "\n=================================="
-echo SERIAL_NUMBER=$SERIAL_NUMBER
-echo USB_UUID=$SERIAL_NUMBER
 echo PASSWORD=$PASSWORD
-echo "==================================\n"
+
+
 
 
 
