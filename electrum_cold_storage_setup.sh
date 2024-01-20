@@ -13,14 +13,19 @@ sudo apt -y upgrade
 #sudo apt -y dist-upgrade
 
 echo "\n"
-echo "======================"
-echo "Setup USB automounting"
-echo "======================"
+echo "========================================"
+echo "Setup USB automounting + trigger scripts"
+echo "========================================"
 echo "\n"
+
 sudo apt -y install autofs
 sudo bash -c "echo \"/media/ /etc/auto.ext-usb --timeout=10,defaults,user,exec,uid=1000\" >> /etc/auto.master"
 sudo bash -c "echo \"usb -fstype=auto :$USB_PARTITION\" >> /etc/auto.ext-usb"
 sudo systemctl restart autofs
+
+sudo cp scripts/device_added.sh /bin/
+sudo chmod +x /bin/device_added.sh
+sudo cp scripts/80-process-usb.rules /etc/udev/rules.d/
 
 echo "\n"
 echo "=================="
