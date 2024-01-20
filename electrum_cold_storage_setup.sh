@@ -2,6 +2,10 @@
 
 source config.sh
 
+# no autologin
+sudo systemctl --quiet set-default multi-user.target
+sudo rm -f /etc/systemd/system/getty@tty1.service.d/autologin.conf
+
 echo "\n"
 echo "=================="
 echo "Update and upgrade"
